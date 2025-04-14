@@ -1,0 +1,217 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Father's Day Drop | Studio Sivad</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    function countdownBetween(id, startDateStr, endDateStr) {
+      const el = document.getElementById(id);
+      const bar = document.getElementById(`${id}-bar`);
+      const label = document.getElementById(`${id}-label`);
+
+      if (!el || !bar || !label) return;
+
+      const startTime = new Date(startDateStr).getTime();
+      const endTime = new Date(endDateStr).getTime();
+
+      const formatTime = (ms) => {
+        const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+        return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      };
+
+      const update = () => {
+        const now = new Date().getTime();
+        const total = endTime - startTime;
+
+        if (now < startTime) {
+          const diff = startTime - now;
+          el.innerText = "Opens in: " + formatTime(diff);
+          label.className = "inline-block px-2 py-1 bg-red-100 text-red-600 text-xs font-semibold rounded";
+          label.innerText = "Upcoming";
+          bar.style.width = "0%";
+          bar.className = "bg-indigo-500 h-full transition-all duration-300 ease-in-out";
+        } else if (now >= startTime && now < endTime) {
+          const diff = endTime - now;
+          el.innerText = "Closes in: " + formatTime(diff);
+          label.className = "inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded";
+          label.innerText = "Open";
+
+          const progress = ((now - startTime) / total) * 100;
+          bar.style.width = `${progress}%`;
+          bar.className = "bg-indigo-500 h-full transition-all duration-300 ease-in-out";
+        } else {
+          el.innerText = "Reservation closed";
+          label.className = "inline-block px-2 py-1 bg-gray-200 text-gray-600 text-xs font-semibold rounded";
+          label.innerText = "Closed";
+          bar.style.width = "100%";
+          bar.className = "bg-gray-400 h-full transition-all duration-300 ease-in-out";
+        }
+      };
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      countdownBetween("countdown-queen", "April 13, 2025 20:00:00", "April 25, 2025 00:00:00");
+      countdownBetween("countdown-wife", "April 25, 2025 00:00:00", "May 5, 2025 00:00:00");
+      countdownBetween("countdown-retail", "May 5, 2025 00:00:00", "May 15, 2025 00:00:00");
+    });
+  </script>
+
+</head>
+<body class="bg-white text-black">
+  <!-- Hero Section -->
+  <section class="relative w-full h-screen bg-black text-white overflow-hidden">
+    <img src="/assets/g.sivad_black_father_and_black_children_walking_into_a_a_luxu_78b6776d-5aaf-4ae4-bbca-2fc3d10942bb_2.png" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Father and Child" />
+    <div class="relative z-10 flex flex-col justify-center items-center h-full text-center space-y-4 px-6">
+      <h1 class="text-3xl md:text-5xl font-bold max-w-2xl leading-snug">Happy Kings Day</h1>
+      <p class="text-base md:text-lg max-w-xl">This Father's Day, Shape his image from the Kings closet.</p>
+      <button class="bg-white text-black px-6 py-3 rounded-xl mt-4">Reserve His Piece</button>
+    </div>
+  </section>
+
+  <!-- The Why Section -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-20 px-6 py-15 max-w-8xl mx-auto items-center mt-20">
+    <video autoplay muted loop playsinline class="rounded-xl w-full h-full object-cover">
+      <source src="/assets/the-queens-smile.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>    <div class="space-y-6">
+      <h2 class="text-3xl font-bold">Reserve now and get the Queen's Price.</h2>
+      <p class="text-gray-700">Our reservation system is dynamic... just like love. The earlier you reserve, the more value you unlock. But this isn’t a discount. It’s a recognition. That your man is a King and that you are his Queen.</p>
+      <p class="text-sm text-gray-500">Lower value tiers unlock as time moves. Tier quantities are limited.</p>
+          </div>
+  </section>
+
+  <!-- Tiers Container -->
+  <section class="px-6 py-16 bg-gray-100 mt-24">
+    <h2 class="text-3xl font-bold text-center mb-10">Reserve Now</h2>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-0 max-w-10xl mx-auto">
+      
+      <!-- Left Column (3/12 width) -->
+      <div class="col-span-12 md:col-span-3 bg-white rounded-0 shadow-0 p-6 hover:shadow-0 transition group cursor-pointer">
+        <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-600">The Queen’s Price - $75</h3>
+        <p class="text-l font-semibold mb-2 group-hover:text-indigo-600">End Date: April 25th, 2025.</p>
+        <p class="text-gray-700 text-sm mb-4">Limited and Coveted.</p>
+        <p class="text-gray-700 text-sm mb-4">25pcs Available.</p>
+        <p class="mt-2 text-sm">
+          <span id="countdown-queen" class="block mb-1"></span>
+          <span id="countdown-queen-label" class=""></span>
+        </p>
+        <div class="w-full bg-gray-200 rounded h-2 mt-2 overflow-hidden">
+          <div id="countdown-queen-bar" class="bg-indigo-500 h-full transition-all duration-300 ease-in-out" style="width: 0%;"></div>
+        </div>
+        <button onclick="toggleDrawer(true)" class="px-2 py-2 bg-black text-white rounded-0 mt-10">
+          View Fabric Details
+        </button>
+      </div>
+
+       <!-- Right Column (4.5/12 width) -->
+       <div class="col-span-12 md:col-span-8 relative group">
+        <video autoplay muted loop playsinline class="rounded-0 w-full h-100 object-cover">
+          <source src="/assets/King's Closet - Father's Day.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>   
+      </div>
+      <div id="fabricDrawer" class="fixed top-0 right-0 w-96 md:w-[300px] h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+        <div class="flex justify-between items-center px-4 py-3 border-b">
+          <h3 class="text-lg font-semibold">Fabric Details</h3>
+          <button onclick="toggleDrawer(false)" class="text-xl">&times;</button>
+        </div>
+        <div class="p-4 space-y-4">
+          <video controls class="rounded-xl w-full shadow-lg" poster="/assets/fabric-thumb.jpg">
+            <source src="https://prd-resource.knitup.io/cms/Material/373e4340-ce32-4547-ba66-a44413e63a69" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+      
+          <img src="/assets/BCI_Cotton.1d9b7e0b.png" alt="BCI Cotton" class="w-20" />
+      
+          <h3 class="text-lg font-bold">BCI Cotton - Bliss</h3>
+      
+          <div>
+            <h4 class="font-semibold mb-2">Highlights</h4>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+              <li>Breathable and comfortable</li>
+              <li>Soft and light</li>
+              <li>Rich, bright dye acceptance</li>
+              <li>Versatile for all seasons</li>
+              <li>Easy care: machine washable</li>
+            </ul>
+          </div>
+      
+          <div>
+            <h4 class="font-semibold mb-2">Washing Instructions</h4>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+              <li>Hand wash cold or 30°C</li>
+              <li>Do not bleach</li>
+              <li>Do not tumble dry</li>
+              <li>Iron at medium heat</li>
+              <li>Dry cleanable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Voting Gallery Section -->
+   <section class="px-6 py-16">
+    <h2 class="text-3xl font-bold text-center mb-8">Choose Your Matching Top</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+      <div class="relative group">
+        <img src="/assets/Work33.png" class="rounded-xl w-full h-96 object-cover" alt="Presence dress" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+          <button class="bg-white text-black px-4 py-2 rounded-lg font-medium">Add To Cart $50</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <img src="/assets/Work34.png" class="rounded-xl w-full h-96 object-cover" alt="Power dress" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+          <button class="bg-white text-black px-4 py-2 rounded-lg font-medium">Add To Cart $50</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Carousel Section -->
+  <section class="text-center max-w-xl italic space-y-4 px-6 py-12 mx-auto">
+    <p>“You didn’t just choose a gift. You honored a man for becoming something more.”</p>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="text-center max-w-2xl space-y-4 px-6 py-12 mx-auto">
+    <div class="space-x-4">
+      <button class="px-6 py-3 bg-black text-white rounded-xl">Reserve His Piece</button>
+      <button class="px-6 py-3 bg-gray-200 text-black rounded-xl">Vote For Yours</button>
+    </div>
+  </section>
+  
+<script>
+  function toggleDrawer(show) {
+    const drawer = document.getElementById('fabricDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+
+    if (show) {
+      drawer.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+    } else {
+      drawer.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+    }
+  }
+
+  // Close drawer when clicking the overlay
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.createElement('div');
+    overlay.id = 'drawerOverlay';
+    overlay.className = 'fixed inset-0 bg-black bg-opacity-40 z-40 hidden';
+    overlay.onclick = () => toggleDrawer(false);
+    document.body.appendChild(overlay);
+  });
+</script>
+</body>
+</html>
